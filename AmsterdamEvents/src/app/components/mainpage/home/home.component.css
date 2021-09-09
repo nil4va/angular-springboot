@@ -1,0 +1,17 @@
+.imgHome {
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+}
+
+.leftHome {
+  max-width: 200px;
+}
+
+.rightHome {
+  max-width: 200px;
+}
+
+p {
+  font-weight: bold;
+}
