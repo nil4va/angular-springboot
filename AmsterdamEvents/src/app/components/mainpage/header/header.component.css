@@ -1,6 +1,6 @@
 header {
   min-width: 930px;
-  background-color: peachpuff;
+  background-color: gray;
 }
 
 .headerPics {
@@ -10,8 +10,7 @@ header {
 }
 
 .title {
-  color: red;
-  font-family: Arial, serif;
+  color: darkred;
   font-weight: bolder;
   text-align: center;
   font-size: 50px;

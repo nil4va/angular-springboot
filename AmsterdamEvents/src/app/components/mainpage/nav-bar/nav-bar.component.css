@@ -1,0 +1,69 @@
+nav {
+  position: relative;
+  margin: 0 auto 0;
+  height: 50px;
+  background: black;
+  font-size: 0;
+}
+
+nav div {
+  font-size: 15px;
+  text-transform: capitalize;
+  color: white;
+  text-decoration: none;
+  line-height: 50px;
+  z-index: 1;
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  margin: 0 20px 0 20px;
+  padding: 0 20px;
+}
+
+.logIn, .signUp {
+  float: right;
+}
+
+div:hover {
+  background-color: darkred;
+  width: auto;
+  padding: 0 20px;
+}
+
+.dropdown {
+  float: left;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 180px;
+  z-index: 1;
+  visibility: hidden;
+  justify-content: center;
+  top: 50px;
+  padding-top: 50px;
+  margin-top: 50px;
+}
+
+.dropdown-content a {
+  float: none;
+  display: block;
+  position: relative;
+  padding: 5px 5px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a {
+  float: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #FF888222;
+}
+
+.dropdown:hover > .dropdown-content {
+  display: block;
+  visibility: visible;
+}
