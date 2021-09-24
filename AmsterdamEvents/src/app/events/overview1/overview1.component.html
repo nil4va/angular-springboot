@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>Title</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Status</th>
+    <th>Entrance Fee</th>
+    <th>Max Participants</th>
+  </tr>
+  <tr *ngFor="let aEvent of aEvents">
+    <td>{{ aEvent.id }}</td>
+    <td>{{ aEvent.title}}</td>
+    <td>{{ aEvent.start }}</td>
+    <td>{{ aEvent.end }}</td>
+    <td>{{ aEvent.status }}</td>
+    <td>{{ aEvent.participationFee }}</td>
+    <td>{{ aEvent.maxParticipants }}</td>
+  </tr>
+</table>
+
+<button (click)="addRandomEvent()" class="float-right">Add Event</button>
