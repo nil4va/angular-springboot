@@ -1,0 +1,56 @@
+<div *ngIf="this.selectedAEvent !== undefined; else nothingSelected">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Selected event details: (id={{ selectedAEvent.id }})</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Title</td>
+        <td>
+          <input (change)="updateSelectedAEvent()" name="title" [(ngModel)]="selectedAEvent.title" class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>
+          <input (change)="updateSelectedAEvent()" name="description" [(ngModel)]="selectedAEvent.description" class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td>
+          <select (change)="updateSelectedAEvent()" class="form-control" [(ngModel)]="selectedAEvent.status">
+            <option *ngFor="let status of statusArray" [ngValue]="status">{{ status }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Is Ticketed</td>
+        <td>
+          <input (change)="updateSelectedAEvent()" type="checkbox" [(ngModel)]="selectedAEvent.isTicketed">
+        </td>
+      </tr>
+      <tr>
+        <td>Participation fee</td>
+        <td>
+          <input (change)="updateSelectedAEvent()" type="text" class="form-control" [(ngModel)]="selectedAEvent.participationFee">
+        </td>
+      </tr>
+      <tr>
+        <td>Maximum participants</td>
+        <td>
+          <input (change)="updateSelectedAEvent()" type="text" class="form-control" [(ngModel)]="selectedAEvent.maxParticipants">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="deleteSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3">Delete</button>
+</div>
+
+<ng-template #nothingSelected>
+  Please select one on the left.
+</ng-template>

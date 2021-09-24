@@ -1,8 +1,16 @@
-<table>
-  <tr>
-    <th>event title</th>
-  </tr>
-  <tr *ngFor="let aEvent of aEvents">
-    <td>{{ aEvent.title }}</td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-md-6">
+    <table>
+      <tr>
+        <th>event title</th>
+      </tr>
+      <tr *ngFor="let aEvent of aEvents">
+        <td (click)="this.selectedAEvent = aEvent"
+            class="{{ this.selectedAEvent === aEvent ? 'bg-dark' : '' }}">{{ aEvent.title }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <app-detail2 [selectedAEvent]="selectedAEvent" (selectedAEventUpdated)="aEventChangedHandler($event)" (selectedAEventRemoved)="aEventDeletedHandler($event)"></app-detail2>
+  </div>
+</div>

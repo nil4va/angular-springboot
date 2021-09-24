@@ -9,20 +9,24 @@ import { NavBarComponent } from './components/mainpage/nav-bar/nav-bar.component
 import { Overview1Component } from './events/overview1/overview1.component';
 import { Overview2Component } from './events/overview2/overview2.component';
 import { EventsComponent } from './events/events.component';
+import { Detail2Component } from './events/detail2/detail2.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    NavBarComponent,
-    Overview1Component,
-    Overview2Component,
-    EventsComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        HomeComponent,
+        NavBarComponent,
+        Overview1Component,
+        Overview2Component,
+        EventsComponent,
+        Detail2Component
+    ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

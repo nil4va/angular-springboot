@@ -1,8 +1,4 @@
-import {getLocaleFirstDayOfWeek} from "@angular/common";
-
-enum AEventStatus {
-  DRAFT, PUBLISHED, CANCELED
-}
+import {AEventStatus} from "./a-event-status";
 
 export class AEvent {
   title: String = "Amazing event";

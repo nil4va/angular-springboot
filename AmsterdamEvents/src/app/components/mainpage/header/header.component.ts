@@ -10,14 +10,9 @@ export class HeaderComponent implements OnInit {
   currentDate = new Date().toLocaleString();
   status = AEvent.createRandomAEvent();
 
-
   constructor() {
     console.log(this.status)
   }
 
-
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AEvent} from "../../models/a-event";
 
 @Component({
@@ -7,7 +7,9 @@ import {AEvent} from "../../models/a-event";
   styleUrls: ['./overview2.component.css']
 })
 export class Overview2Component implements OnInit {
+
   aEvents = [] as AEvent[];
+  selectedAEvent: AEvent | undefined;
 
   constructor() {
   }
@@ -20,5 +22,18 @@ export class Overview2Component implements OnInit {
 
   addRandomEvent() {
     this.aEvents.push(<AEvent>AEvent.createRandomAEvent());
+  }
+
+  aEventChangedHandler(aEvent: AEvent) {
+    this.selectedAEvent = aEvent;
+  }
+
+  aEventDeletedHandler(aEventToRemove: AEvent) {
+    this.aEvents.forEach((aEvent,index)=>{
+      if (aEvent === aEventToRemove) {
+        this.aEvents.splice(index,1);
+        return;
+      }
+    });
   }
 }
