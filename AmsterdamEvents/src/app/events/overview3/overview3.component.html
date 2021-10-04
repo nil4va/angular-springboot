@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-6">
+    <table>
+      <tr>
+        <th>event title</th>
+      </tr>
+      <tr *ngFor="let aEvent of this.aEventsService.findAll()">
+        <td (click)="aEventSelectedHandler(aEvent)"
+            class="{{ this.selectedAEventId === aEvent.id ? 'bg-dark' : '' }}">{{ aEvent.title }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <app-detail3 [selectedAEventId]="selectedAEventId" [updatedAtEventId]="updatedAtEventId" [selectedAEvent]="selectedAEvent"></app-detail3>
+  </div>
+</div>
