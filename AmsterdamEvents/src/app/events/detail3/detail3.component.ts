@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AEventStatusArrayMapper} from "../../mapper/a-event-status-array-mapper";
 import {AEvent} from "../../models/a-event";
 import {AEventsService} from "../../services/a-events.service";
@@ -15,14 +15,14 @@ export class Detail3Component implements OnInit {
 
   @Input() selectedAEvent: AEvent | undefined;
 
-  @Output() selectedAEventUpdated: EventEmitter<AEvent> = new EventEmitter<AEvent>();
-
   statusArray: any;
+  hasChanged: boolean = false;
 
   constructor(private aEventsService: AEventsService) {}
 
   ngOnInit(): void {
     this.statusArray = AEventStatusArrayMapper.map();
+    this.updateHasChanged();
   }
 
   hasFormChanged(): boolean {
@@ -69,20 +69,22 @@ export class Detail3Component implements OnInit {
     return false;
   }
 
-  updateSelectedAEvent() {
-    if (this.selectedAEvent === undefined) {
-      return;
-    }
-    this.aEventsService.save(this.selectedAEvent);
+  updateHasChanged() {
+    this.hasChanged = this.hasFormChanged();
   }
-
-  //TODO: Create alert to confirm; Delete, clear, reset, and cancel. Check if something has changed.
-  //TODO: Disable the Save and reset if nothing has changed. And the delete button when there are unsaved changes (using the "hasFormChanged" method).
 
   clearSelectedAEvent() {
     if (this.selectedAEvent === undefined) {
       return;
     }
+
+    if (this.hasChanged) {
+      const confirmation = confirm('Are you sure you want to discard unsaved changes?');
+      if (!confirmation) {
+        return;
+      }
+    }
+
     this.selectedAEvent.title = '';
     this.selectedAEvent.description = '';
     this.selectedAEvent.start = new Date();
@@ -92,6 +94,8 @@ export class Detail3Component implements OnInit {
     this.selectedAEvent.isTicketed = false;
     this.selectedAEvent.participationFee = 0;
     this.selectedAEvent.maxParticipants = 0;
+
+    this.updateHasChanged();
   }
 
   resetSelectedAEvent() {
@@ -104,6 +108,13 @@ export class Detail3Component implements OnInit {
       return;
     }
 
+    if (this.hasChanged) {
+      const confirmation = confirm('Are you sure you want to discard unsaved changes?');
+      if (!confirmation) {
+        return;
+      }
+    }
+
     this.selectedAEvent.title = originalAEvent.title;
     this.selectedAEvent.description = originalAEvent.description;
     this.selectedAEvent.start = originalAEvent.start;
@@ -112,14 +123,14 @@ export class Detail3Component implements OnInit {
     this.selectedAEvent.isTicketed = originalAEvent.isTicketed;
     this.selectedAEvent.participationFee = originalAEvent.participationFee;
     this.selectedAEvent.maxParticipants = originalAEvent.maxParticipants;
+
+    this.updateHasChanged();
   }
 
   saveSelectedAEvent() {
     if (this.selectedAEvent === undefined) {
       return;
     }
-
-    console.log(this.aEventsService.aEvents)
 
     const originalAEvent = this.aEventsService.findById(this.selectedAEvent.id);
     if (originalAEvent === null) {
@@ -134,19 +145,39 @@ export class Detail3Component implements OnInit {
     originalAEvent.isTicketed = this.selectedAEvent.isTicketed;
     originalAEvent.participationFee = this.selectedAEvent.participationFee;
     originalAEvent.maxParticipants = this.selectedAEvent.maxParticipants;
+
+    this.updateHasChanged();
   }
 
   cancelSelectedAEvent() {
+    if (this.hasChanged) {
+      const confirmation = confirm('Are you sure you want to discard unsaved changes?');
+      if (!confirmation) {
+        return;
+      }
+    }
+
     this.selectedAEvent = undefined;
     this.selectedAEventId = -1;
+
+    this.updateHasChanged();
   }
 
   deleteSelectedAEvent() {
     if (this.selectedAEventId === undefined) {
       return;
     }
+    if (this.hasChanged) {
+      const confirmation = confirm('Are you sure you want to discard unsaved changes?');
+      if (!confirmation) {
+        return;
+      }
+    }
+
     this.aEventsService.deleteBy(this.selectedAEventId);
     this.selectedAEvent = undefined;
     this.selectedAEventId = undefined;
+
+    this.updateHasChanged();
   }
 }

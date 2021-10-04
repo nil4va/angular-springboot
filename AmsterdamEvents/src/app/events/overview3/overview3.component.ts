@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AEvent} from "../../models/a-event";
 import {AEventsService} from "../../services/a-events.service";
 
@@ -25,9 +25,5 @@ export class Overview3Component implements OnInit {
   aEventSelectedHandler(aEvent: AEvent) {
     this.selectedAEventId = aEvent.id;
     this.selectedAEvent = Object.assign({}, aEvent);
-  }
-
-  aEventDeletedHandler(aEventToRemove: AEvent) {
-    this.aEventsService.deleteBy(aEventToRemove.id);
   }
 }
