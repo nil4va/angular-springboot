@@ -15,6 +15,8 @@ import { Detail3Component } from './events/detail3/detail3.component';
 import { FormsModule } from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import { ErrorComponent } from './components/mainpage/error/error.component';
+import { Overview4Component } from './components/aevents/overview4/overview4.component';
+import { Detail4Component } from './components/aevents/detail4/detail4.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'events/overview1', component: Overview1Component },
   { path: 'events/overview2', component: Overview2Component },
   { path: 'events/overview3', component: Overview3Component },
+  { path: 'events/overview4', component: Overview4Component },
   { path: '**', component: ErrorComponent},
 ];
 
@@ -37,7 +40,9 @@ const routes: Routes = [
         EventsComponent,
         Detail2Component,
         Detail3Component,
-        ErrorComponent
+        ErrorComponent,
+        Overview4Component,
+        Detail4Component
     ],
   imports: [
     BrowserModule,
