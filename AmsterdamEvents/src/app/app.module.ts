@@ -12,7 +12,16 @@ import { Overview3Component } from './events/overview3/overview3.component';
 import { EventsComponent } from './events/events.component';
 import { Detail2Component } from './events/detail2/detail2.component';
 import { Detail3Component } from './events/detail3/detail3.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
+
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'events/overview1', component: Overview1Component },
+  { path: 'events/overview2', component: Overview2Component },
+  { path: 'events/overview3', component: Overview3Component },
+];
 
 @NgModule({
     declarations: [
@@ -30,7 +39,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
