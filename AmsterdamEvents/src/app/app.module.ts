@@ -14,6 +14,7 @@ import { Detail2Component } from './events/detail2/detail2.component';
 import { Detail3Component } from './events/detail3/detail3.component';
 import { FormsModule } from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
+import { ErrorComponent } from './components/mainpage/error/error.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'events/overview1', component: Overview1Component },
   { path: 'events/overview2', component: Overview2Component },
   { path: 'events/overview3', component: Overview3Component },
+  { path: '**', component: ErrorComponent},
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const routes: Routes = [
         Overview3Component,
         EventsComponent,
         Detail2Component,
-        Detail3Component
+        Detail3Component,
+        ErrorComponent
     ],
   imports: [
     BrowserModule,
