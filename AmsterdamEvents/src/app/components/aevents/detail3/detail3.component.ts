@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AEventStatusArrayMapper} from "../../mapper/a-event-status-array-mapper";
-import {AEvent} from "../../models/a-event";
-import {AEventsService} from "../../services/a-events.service";
+import {AEventStatusArrayMapper} from "../../../mapper/a-event-status-array-mapper";
+import {AEvent} from "../../../models/a-event";
+import {AEventsService} from "../../../services/a-events.service";
 
 @Component({
   selector: 'app-detail3',

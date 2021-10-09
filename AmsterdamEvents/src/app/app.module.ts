@@ -6,17 +6,17 @@ import { HeaderComponent } from './components/mainpage/header/header.component';
 import { HomeComponent } from './components/mainpage/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavBarComponent } from './components/mainpage/nav-bar/nav-bar.component';
-import { Overview1Component } from './events/overview1/overview1.component';
-import { Overview2Component } from './events/overview2/overview2.component';
-import { Overview3Component } from './events/overview3/overview3.component';
+import { Overview1Component } from './components/aevents/overview1/overview1.component';
+import { Overview2Component } from './components/aevents/overview2/overview2.component';
+import { Overview3Component } from './components/aevents/overview3/overview3.component';
+import { Overview4Component } from './components/aevents/overview4/overview4.component';
 import { EventsComponent } from './events/events.component';
-import { Detail2Component } from './events/detail2/detail2.component';
-import { Detail3Component } from './events/detail3/detail3.component';
+import { Detail2Component } from './components/aevents/detail2/detail2.component';
+import { Detail3Component } from './components/aevents/detail3/detail3.component';
 import { FormsModule } from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import { ErrorComponent } from './components/mainpage/error/error.component';
-import { Overview4Component } from './components/aevents/overview4/overview4.component';
-import { Detail4Component } from './components/aevents/detail4/detail4.component';
+import {Detail4Component} from "./components/aevents/detail4/detail4.component";
 
 
 const routes: Routes = [
@@ -24,7 +24,9 @@ const routes: Routes = [
   { path: 'events/overview1', component: Overview1Component },
   { path: 'events/overview2', component: Overview2Component },
   { path: 'events/overview3', component: Overview3Component },
-  { path: 'events/overview4', component: Overview4Component },
+  { path: 'events/overview4', component: Overview4Component, children: [
+      { path: ':id', component: Overview4Component }
+    ]},
   { path: '**', component: ErrorComponent},
 ];
 

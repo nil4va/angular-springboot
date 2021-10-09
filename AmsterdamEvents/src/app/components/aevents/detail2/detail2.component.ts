@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {AEvent} from "../../models/a-event";
-import {AEventStatusArrayMapper} from "../../mapper/a-event-status-array-mapper";
+import {AEvent} from "../../../models/a-event";
+import {AEventStatusArrayMapper} from "../../../mapper/a-event-status-array-mapper";
 
 @Component({
   selector: 'app-detail2',

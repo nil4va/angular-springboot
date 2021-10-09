@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-error',
@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor(private router: Router ) {
-    let route : any = this.router.url;
-    console.log(route)
+  constructor(router: Router) {
   }
 
   ngOnInit(): void {
