@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AEvent} from "../../../models/a-event";
 import {AEventsService} from "../../../services/a-events.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,12 +10,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class Overview4Component implements OnInit {
 
-  selectedAEventId: number | undefined;
+  selectedAEventId: AEvent | any;
   updatedAtEventId: number | undefined;
-
   selectedAEvent: AEvent | undefined;
 
-  constructor(public aEventsService: AEventsService, private  router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(public aEventsService: AEventsService, private  router: Router, private activatedRoute: ActivatedRoute) {
+    activatedRoute.firstChild?.params.subscribe(this.selectedAEventId)
+  }
 
   ngOnInit(): void {
     for (let i = 0; i < 9; i++) {

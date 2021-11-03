@@ -1,31 +1,39 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AEvent} from "../../../models/a-event";
 import {AEventsService} from "../../../services/a-events.service";
 import {AEventStatusArrayMapper} from "../../../mapper/a-event-status-array-mapper";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-detail4',
   templateUrl: './detail4.component.html',
   styleUrls: ['./detail4.component.css']
 })
-export class Detail4Component implements OnInit {
+export class Detail4Component implements OnInit, OnDestroy {
 
-  @Input() selectedAEventId: number | undefined;
-  @Input() updatedAtEventId: number | undefined;
-
-  @Input() selectedAEvent: AEvent | undefined;
+  selectedAEventId: AEvent | any;
+  // @Input() updatedAtEventId: number | undefined;
+  selectedAEvent: AEvent | any;
 
   statusArray: any;
   hasChanged: boolean = false;
+  private paramsSubscription: Subscription | undefined;
 
-  constructor(private aEventsService: AEventsService) {
-
+  constructor(private aEventsService: AEventsService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.selectedAEvent = this.aEventsService.findById(+params['id'])
+    })
+    this.selectedAEvent = this.activatedRoute.snapshot.params['id']
   }
 
   ngOnInit(): void {
     this.statusArray = AEventStatusArrayMapper.map();
     this.updateHasChanged();
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription?.unsubscribe()
   }
 
   hasFormChanged(): boolean {

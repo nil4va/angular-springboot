@@ -9,18 +9,12 @@ export class AEvent {
   isTicketed: boolean;
   participationFee: number;
   maxParticipants: number;
-  id: number;
+  id: number = AEvent.beginId;
+  static beginId: number = 19999;
+  static getNextId = () => ++AEvent.beginId;
 
-  public static createRandomAEvent(): AEvent {
-    let title: String = "Amazing event";
-    let description: String = "just come";
-    let id = Math.floor(Math.random() * (20100 - 20001 + 1) + 20001);
-    return new AEvent(id, title, this.randomStart(), this.randomDuration(), description, this.randomStatus(), this.randomIsTicketed(), this.randomFee(), this.randomParticipants()
-    )
-  }
-
-  constructor(id: number, title: String, start: Date, end: Date, description: String, status: AEventStatus | string, isTicketed: boolean, participationFee: number, maxParticipants: number) {
-    this.id = id;
+  constructor(id: number, title: String, start: Date, end: Date, description: String, status: AEventStatus | string, isTicketed: boolean,
+              participationFee: number, maxParticipants: number) {
     this.title = title;
     this.start = start;
     this.end = end;
@@ -29,6 +23,15 @@ export class AEvent {
     this.isTicketed = isTicketed;
     this.participationFee = participationFee;
     this.maxParticipants = maxParticipants;
+  }
+
+  public static createRandomAEvent(): AEvent {
+    let title: String = "Amazing event";
+    let description: String = "just come";
+
+    return new AEvent(this.getNextId(), title, this.randomStart(), this.randomDuration(), description, this.randomStatus(),
+      this.randomIsTicketed(), this.randomFee(), this.randomParticipants()
+    )
   }
 
   public static randomStatus(): string {
