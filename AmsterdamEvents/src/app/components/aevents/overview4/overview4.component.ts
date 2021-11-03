@@ -15,13 +15,19 @@ export class Overview4Component implements OnInit {
   selectedAEvent: AEvent | undefined;
 
   constructor(public aEventsService: AEventsService, private  router: Router, private activatedRoute: ActivatedRoute) {
-    activatedRoute.firstChild?.params.subscribe(this.selectedAEventId)
-  }
 
-  ngOnInit(): void {
+    // Create random events
     for (let i = 0; i < 9; i++) {
       this.aEventsService.save(<AEvent>AEvent.createRandomAEvent())
     }
+
+    const instance = this;
+    activatedRoute.firstChild?.params.subscribe(function(params) {
+      instance.selectedAEventId = +params.id ?? -1;
+    });
+  }
+
+  ngOnInit(): void {
   }
 
   onSelect (eId: number) {

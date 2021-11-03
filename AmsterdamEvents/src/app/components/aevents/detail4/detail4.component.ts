@@ -23,8 +23,7 @@ export class Detail4Component implements OnInit, OnDestroy {
   constructor(private aEventsService: AEventsService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.selectedAEvent = this.aEventsService.findById(+params['id'])
-    })
-    this.selectedAEvent = this.activatedRoute.snapshot.params['id']
+    });
   }
 
   ngOnInit(): void {
