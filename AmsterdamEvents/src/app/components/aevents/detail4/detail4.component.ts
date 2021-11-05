@@ -176,6 +176,9 @@ export class Detail4Component implements OnInit, OnDestroy {
     this.selectedAEvent = undefined;
     this.selectedAEventId = -1;
 
+    // Navigate back to the parent
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute})
+
     this.updateHasChanged();
   }
 
