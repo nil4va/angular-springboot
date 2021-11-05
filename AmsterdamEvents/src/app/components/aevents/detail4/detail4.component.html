@@ -48,7 +48,7 @@
     </tbody>
   </table>
 
-  <button (click)="deleteSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3 ml-2" [disabled]="!hasChanged">Delete</button>
+  <button (click)="deleteSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3 ml-2">Delete</button>
   <button (click)="saveSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3 ml-2" [disabled]="!hasChanged">Save</button>
   <button (click)="clearSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3 ml-2">Clear</button>
   <button (click)="resetSelectedAEvent()" class="btn btn-danger btn-sm float-right mb-3 ml-2" [disabled]="!hasChanged">Reset</button>
@@ -56,9 +56,7 @@
 </div>
 
 <ng-template #nothingSelected>
-  <a [routerLink]="['/overview4', selectedAEvent.id]">
   Please select one on the left.
-  </a>
 </ng-template>
 
 
