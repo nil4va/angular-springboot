@@ -12,8 +12,7 @@ import {Subscription} from "rxjs";
 })
 export class Detail4Component implements OnInit, OnDestroy {
 
-  selectedAEventId: AEvent | any;
-  // @Input() updatedAtEventId: number | undefined;
+  selectedAEventId: number = -1;
   selectedAEvent: AEvent | any;
 
   statusArray: any;
@@ -22,7 +21,14 @@ export class Detail4Component implements OnInit, OnDestroy {
 
   constructor(private aEventsService: AEventsService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.selectedAEvent = this.aEventsService.findById(+params['id'])
+      const originalAEvent = this.aEventsService.findById(+params['id'])
+      if (originalAEvent === null) {
+        this.selectedAEvent = undefined;
+        this.selectedAEventId = -1;
+      } else {
+        this.selectedAEvent = Object.assign({}, originalAEvent);
+        this.selectedAEventId = originalAEvent.id;
+      }
     });
   }
 
@@ -170,11 +176,14 @@ export class Detail4Component implements OnInit, OnDestroy {
     this.selectedAEvent = undefined;
     this.selectedAEventId = -1;
 
+    // Navigate back to the parent
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute})
+
     this.updateHasChanged();
   }
 
   deleteSelectedAEvent() {
-    if (this.selectedAEventId === undefined) {
+    if (this.selectedAEventId === -1) {
       return;
     }
     if (this.hasChanged) {
@@ -186,7 +195,7 @@ export class Detail4Component implements OnInit, OnDestroy {
 
     this.aEventsService.deleteBy(this.selectedAEventId);
     this.selectedAEvent = undefined;
-    this.selectedAEventId = undefined;
+    this.selectedAEventId = -1;
 
     this.updateHasChanged();
   }
