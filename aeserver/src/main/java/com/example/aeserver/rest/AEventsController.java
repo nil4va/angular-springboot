@@ -1,5 +1,6 @@
 package com.example.aeserver.rest;
 
+import com.example.aeserver.models.AEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +12,11 @@ import java.util.List;
 
 @RestController
 public class AEventsController {
-//    @GetMapping("/AEvents");
-//    public List<AEvent> getAllAEvents {
-//
-//    }
+
+    @GetMapping("/AEvents")
+    public List<AEvent> getAllAEvents() {
+        return List.of(
+                new AEvent("Test-event-A"),
+                new AEvent("Test-event-B"));
+    }
 }
