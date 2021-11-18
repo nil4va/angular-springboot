@@ -1,9 +1,7 @@
 package com.example.aeserver.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -13,70 +11,52 @@ import java.util.*;
  * @author Nilava Kazal [studentennummer: 500847707] 07/11/2021 13:55
  */
 
-@Entity(name = "AEvent")
 public class AEvent implements Serializable {
-    String title = "Amazing event";
 
-    @Column(name = "description")
-    String description = "just come";
+    enum AEventStatus {
+        DRAFT,
+        PUBLISHED,
+        CANCELED
+    }
 
-    @Column(name = "start_date")
-    String start;
 
-    @Column(name = "end_date")
-    String end;
+    long id;
+    public static long beginId = 19999;
 
-    @Column(name = "status")
-    String status;
+    String title;
 
-    @Column(name = "is_ticketed")
+    String description;
+
+    Date start;
+
+    Date end;
+
+    AEventStatus status;
+
     boolean isTicketed;
 
-    @Column(name = "participation_fee")
     double participationFee;
 
-    @Column(name = "max_participants")
-    String maxParticipants;
+    int maxParticipants;
 
-    int id;
-    static int beginId = 19999;
 
-    @Id
-    @Column(name = "id")
-    static int getNextId = ++AEvent.beginId;
-
-    public AEvent(String title) {
-        this.id = getNextId;
+    public AEvent(long id, String title, String description, Date start, Date end, AEventStatus status, boolean isTicketed, double participationFee, int maxParticipants) {
+        this.id = id;
         this.title = title;
-        this.start = randomDate();
-        this.end = randomDate();
         this.description = description;
-        this.status = randomStatus();
-        this.isTicketed = randomIsTicketed();
-        this.participationFee = randomFee();
-        this.maxParticipants = randomParticipants();
+        this.start = start;
+        this.end = end;
+        this.status = status;
+        this.isTicketed = isTicketed;
+        this.participationFee = participationFee;
+        this.maxParticipants = maxParticipants;
     }
 
-
-    public static String randomStatus() {
-        List<String> statuses = Arrays.asList("DRAFT", "PUBLISHED", "CANCELED");
-        Random rand = new Random();
-
-        return statuses.get(rand.nextInt(statuses.size()));
-    }
-
-    public static String randomDate() {
+    public static Date randomDate() {
         Random rnd = new Random();
         Date date = new Date(Math.abs(System.currentTimeMillis() - rnd.nextLong()));
-        return date.toString();
+        return date;
     }
-
-//    public static int randomDuration() {
-//        int start = randomDate();
-//        int end = (int) (randomDate() + Math.random() * 10000000);
-//
-//        return start + (int) Math.round(Math.random() * (end - start));
-//    }
 
     public static boolean randomIsTicketed() {
         return Math.random() < 0.5;
@@ -88,61 +68,98 @@ public class AEvent implements Serializable {
         } else return 00.0;
     }
 
-
-    public static String randomParticipants() {
-        if (randomIsTicketed()) {
-            return Math.round(Math.random() * (10 - 1 + 1) + 1) + "00";
-        } else return null;
-    }
-
     public static AEvent createRandomAEvent() {
+
         String title = "Amazing event";
         String description = "just come";
+        Date start = randomDate();
+        Date end = randomDate();
+        AEventStatus status = AEventStatus.CANCELED;
+        boolean isTicketed = true;
+        double participationFee = randomFee();
+        int maxParticipants = 40;
 
-        return new AEvent(title);
+
+        return new AEvent(AEvent.beginId++, title, description, start, end, status,isTicketed, participationFee, maxParticipants);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public static long getBeginId() {
+        return beginId;
+    }
+
+    public static void setBeginId(long beginId) {
+        AEvent.beginId = beginId;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    public String getStart() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getStart() {
         return start;
     }
 
-    public String getEnd() {
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
         return end;
     }
 
-    public String getStatus() {
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public AEventStatus getStatus() {
         return status;
+    }
+
+    public void setStatus(AEventStatus status) {
+        this.status = status;
     }
 
     public boolean isTicketed() {
         return isTicketed;
     }
 
+    public void setTicketed(boolean ticketed) {
+        isTicketed = ticketed;
+    }
+
     public double getParticipationFee() {
         return participationFee;
     }
 
-    public String getMaxParticipants() {
+    public void setParticipationFee(double participationFee) {
+        this.participationFee = participationFee;
+    }
+
+    public int getMaxParticipants() {
         return maxParticipants;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public static int getBeginId() {
-        return beginId;
-    }
-
-    public static int getGetNextId() {
-        return getNextId;
+    public void setMaxParticipants(int maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 }
