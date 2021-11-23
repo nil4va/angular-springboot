@@ -1,6 +1,6 @@
-package com.example.aeserver.repositories;
+package nl.hva.aeserver.repositories;
 
-import com.example.aeserver.models.AEvent;
+import nl.hva.aeserver.models.AEvent;
 
 import java.util.List;
 

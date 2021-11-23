@@ -1,16 +1,11 @@
-package com.example.aeserver.models;
-
-
+package nl.hva.aeserver.models;
 
 import java.io.Serializable;
 import java.util.*;
 
 /**
- *
- *
  * @author Nilava Kazal [studentennummer: 500847707] 07/11/2021 13:55
  */
-
 public class AEvent implements Serializable {
 
     enum AEventStatus {
@@ -19,28 +14,28 @@ public class AEvent implements Serializable {
         CANCELED
     }
 
-
-    long id;
+    private long id;
     public static long beginId = 19999;
+    private String title;
+    private String description;
+    private Date start;
+    private Date end;
+    private AEventStatus status;
+    private boolean isTicketed;
+    private double participationFee;
+    private int maxParticipants;
 
-    String title;
-
-    String description;
-
-    Date start;
-
-    Date end;
-
-    AEventStatus status;
-
-    boolean isTicketed;
-
-    double participationFee;
-
-    int maxParticipants;
-
-
-    public AEvent(long id, String title, String description, Date start, Date end, AEventStatus status, boolean isTicketed, double participationFee, int maxParticipants) {
+    public AEvent(
+            long id,
+            String title,
+            String description,
+            Date start,
+            Date end,
+            AEventStatus status,
+            boolean isTicketed,
+            double participationFee,
+            int maxParticipants
+    ) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -69,7 +64,6 @@ public class AEvent implements Serializable {
     }
 
     public static AEvent createRandomAEvent() {
-
         String title = "Amazing event";
         String description = "just come";
         Date start = randomDate();
@@ -79,8 +73,7 @@ public class AEvent implements Serializable {
         double participationFee = randomFee();
         int maxParticipants = 40;
 
-
-        return new AEvent(AEvent.beginId++, title, description, start, end, status,isTicketed, participationFee, maxParticipants);
+        return new AEvent(AEvent.beginId++, title, description, start, end, status, isTicketed, participationFee, maxParticipants);
     }
 
     public long getId() {

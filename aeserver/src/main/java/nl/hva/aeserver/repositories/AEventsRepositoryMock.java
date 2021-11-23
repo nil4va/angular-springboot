@@ -1,8 +1,9 @@
-package com.example.aeserver.repositories;
+package nl.hva.aeserver.repositories;
 
-import com.example.aeserver.models.AEvent;
+import nl.hva.aeserver.models.AEvent;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public class AEventsRepositoryMock implements AEventsRepository {
-    public List<AEvent> aEvents;
+    public List<AEvent> aEvents = new ArrayList<>();
 
     public AEventsRepositoryMock() {
         aEvents.add(AEvent.createRandomAEvent());
@@ -27,9 +28,9 @@ public class AEventsRepositoryMock implements AEventsRepository {
 
     @Override
     public AEvent findByID(long id) {
-        for (int i = 0; i < aEvents.size(); i++) {
-            if (aEvents.get(i).getId() == id) {
-                return aEvents.get(i);
+        for (AEvent aEvent : aEvents) {
+            if (aEvent.getId() == id) {
+                return aEvent;
             }
         }
         return null;
@@ -37,12 +38,10 @@ public class AEventsRepositoryMock implements AEventsRepository {
 
     @Override
     public AEvent save(AEvent aEvent) {
-        if(aEvent.getId() == 0) {
+        if (aEvent.getId() == 0) {
             aEvent.setId(AEvent.beginId++);
-            aEvents.add(aEvent);
-        } else {
-            aEvents.add(aEvent);
         }
+        aEvents.add(aEvent);
 
         return null;
     }
