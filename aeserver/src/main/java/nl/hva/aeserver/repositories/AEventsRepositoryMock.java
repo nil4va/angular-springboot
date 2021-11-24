@@ -17,8 +17,6 @@ public class AEventsRepositoryMock implements AEventsRepository {
         aEvents.add(AEvent.createRandomAEvent());
         aEvents.add(AEvent.createRandomAEvent());
         aEvents.add(AEvent.createRandomAEvent());
-        aEvents.add(AEvent.createRandomAEvent());
-        aEvents.add(AEvent.createRandomAEvent());
     }
 
     @Override
@@ -43,7 +41,7 @@ public class AEventsRepositoryMock implements AEventsRepository {
         }
         aEvents.add(aEvent);
 
-        return null;
+        return aEvent;
     }
 
     @Override

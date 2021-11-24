@@ -1,11 +1,18 @@
 package nl.hva.aeserver.models;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.apache.tomcat.util.json.JSONParser;
+
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Nilava Kazal [studentennummer: 500847707] 07/11/2021 13:55
  */
+@JsonFilter("AEventFilter")
 public class AEvent implements Serializable {
 
     enum AEventStatus {
@@ -14,16 +21,36 @@ public class AEvent implements Serializable {
         CANCELED
     }
 
+    @JsonView
     private long id;
+    @JsonIgnore
     public static long beginId = 19999;
+    @JsonView
     private String title;
+    @JsonIgnore
     private String description;
+    @JsonIgnore
     private Date start;
+    @JsonIgnore
     private Date end;
+    @JsonView
     private AEventStatus status;
+    @JsonIgnore
     private boolean isTicketed;
+    @JsonIgnore
     private double participationFee;
+    @JsonIgnore
     private int maxParticipants;
+
+    protected AEvent() {
+
+    }
+
+    public AEvent(long id, String title, AEventStatus status) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+    }
 
     public AEvent(
             long id,
@@ -48,9 +75,7 @@ public class AEvent implements Serializable {
     }
 
     public static Date randomDate() {
-        Random rnd = new Random();
-        Date date = new Date(Math.abs(System.currentTimeMillis() - rnd.nextLong()));
-        return date;
+        return new Date(ThreadLocalRandom.current().nextInt() * 1000L);
     }
 
     public static boolean randomIsTicketed() {
